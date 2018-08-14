@@ -21,7 +21,7 @@ export class DataService {
 
     getOneTask(id) {
         console.log('getOneTask invoked');
-        return this.http.get('/tasks/' + id);
+        return this.http.get('https://jsonplaceholder.typicode.com/todos/' + id);
     }
 
     deleteTask(id) {

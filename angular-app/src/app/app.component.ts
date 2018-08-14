@@ -9,55 +9,16 @@ import { DataService } from './data.service';
 export class AppComponent {
     tasks: any;
     task: any;
+    show:boolean;
 
     constructor(private _dataService: DataService) {
-        // this.tasks = [ 
-        //     {
-        //         "userId": 1,
-        //         "id": 1,
-        //         "title": "Finish Angular Assignments",
-        //         "completed": false
-        //       },
-        //       {
-        //         "userId": 1,
-        //         "id": 2,
-        //         "title": "Do laundry",
-        //         "completed": false
-        //       },
-        //       {
-        //         "userId": 1,
-        //         "id": 3,
-        //         "title": "Buy Milk ",
-        //         "completed": false
-        //       },{
-        //         "userId": 1,
-        //         "id": 20,
-        //         "title": "Have some donuts",
-        //         "completed": true
-        //       },
-        //       {
-        //         "userId": 2,
-        //         "id": 21,
-        //         "title": "suscipit repellat esse quibusdam voluptatem incidunt",
-        //         "completed": false
-        //       },
-        //       {
-        //         "userId": 2,
-        //         "id": 22,
-        //         "title": "distinctio vitae autem nihil ut molestias quo",
-        //         "completed": true
-        //       },
-        //       {
-        //         "userId": 2,
-        //         "id": 23,
-        //         "title": "et itaque necessitatibus maxime molestiae qui quas velit",
-        //         "completed": false
-        //       }
-        // ];
         this.task = []
         this.task = null;
+        this.show = false;
     }
-
+    toggle(){
+        this.show = !this.show;
+    }
     getTasks() {
         console.log('getTasks is working');
         const tempObservable = this._dataService.getTasks();
@@ -73,6 +34,7 @@ export class AppComponent {
     getTask(id) {
         console.log('getTask is working');
         const tempObservable = this._dataService.getOneTask(id);
+
         tempObservable.subscribe(
             (taskReturned) => {
                 console.log('response: ', taskReturned);
@@ -81,9 +43,6 @@ export class AppComponent {
                 console.log('err: ', err);
             });
     }
-
-
-
 
 
 }
