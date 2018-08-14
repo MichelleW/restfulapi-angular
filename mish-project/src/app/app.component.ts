@@ -1,5 +1,6 @@
+import { PokemonService } from './pokemon.service';
 import { Component } from '@angular/core';
-import {DataService} from './data.service';
+// import {DataService} from './data.service';
 
 
 
@@ -11,7 +12,7 @@ import {DataService} from './data.service';
 
 export class AppComponent {
   //inject service by adding to param 
-  constructor(private _dataService: DataService){
+  constructor(private _pokemon: PokemonService){
 
   }
 
