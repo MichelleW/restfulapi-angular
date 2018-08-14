@@ -16,7 +16,7 @@ export class DataService {
     }
 
     getTasks() {
-        return this.http.get('/tasks');
+        return this.http.get('https://jsonplaceholder.typicode.com/todos/');
     }
 
     getOneTask(id) {

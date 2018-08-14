@@ -13,22 +13,22 @@
   <div class="container mt-5">
     <h1 class="text-center text-danger">Restful Tasks API</h1>
     <h2 class="text-center">All the Tasks:</h2>
-      <!-- {{ tasks | json }} -->
-      <ul class="list-group" *ngFor="let task of tasks"> 
+      {{ tasks | json }}
+      <!-- <ul class="list-group" *ngFor="let task of tasks"> 
         <li>{{task.title}}</li>
-      </ul>
+      </ul> -->
 
     <br>
     
 
 
-    <!-- <button (click)="getTasks()" class="btn btn-danger">Get Tasks</button> -->
-    <!-- <button (click)="getTask(3)" class="btn btn-danger">Get Third Task</button> -->
+    <button (click)="getTasks()" class="btn btn-danger">Get Tasks</button>
+    <button (click)="getTask(3)" class="btn btn-danger">Get Third Task</button>
     <h2>The third task: </h2>
     
-    <ul *ngIf="tasks[2]">
+    <!-- <ul *ngIf="tasks[2]">
       <li>{{tasks[2].title}}</li>
-    </ul>
+    </ul> -->
   </div>
   
 </body>
