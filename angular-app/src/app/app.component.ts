@@ -11,7 +11,49 @@ export class AppComponent {
     task: any;
 
     constructor(private _dataService: DataService) {
-        this.tasks = [ {id: 1, title: 'first', dsecription: 'first desc'}];
+        this.tasks = [ 
+            {
+                "userId": 1,
+                "id": 1,
+                "title": "Finish Angular Assignments",
+                "completed": false
+              },
+              {
+                "userId": 1,
+                "id": 2,
+                "title": "Do laundry",
+                "completed": false
+              },
+              {
+                "userId": 1,
+                "id": 3,
+                "title": "Buy Milk ",
+                "completed": false
+              },{
+                "userId": 1,
+                "id": 20,
+                "title": "Have some donuts",
+                "completed": true
+              },
+              {
+                "userId": 2,
+                "id": 21,
+                "title": "suscipit repellat esse quibusdam voluptatem incidunt",
+                "completed": false
+              },
+              {
+                "userId": 2,
+                "id": 22,
+                "title": "distinctio vitae autem nihil ut molestias quo",
+                "completed": true
+              },
+              {
+                "userId": 2,
+                "id": 23,
+                "title": "et itaque necessitatibus maxime molestiae qui quas velit",
+                "completed": false
+              }
+        ];
         this.task = null;
     }
 
@@ -27,9 +69,9 @@ export class AppComponent {
             });
     }
 
-    getTask() {
+    getTask(id) {
         console.log('getTask is working');
-        const tempObservable = this._dataService.getOneTask('5b294b2e4577e0388761d8c5');
+        const tempObservable = this._dataService.getOneTask(id);
         tempObservable.subscribe(
             (taskReturned) => {
                 console.log('response: ', taskReturned);
