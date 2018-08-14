@@ -34,16 +34,14 @@ mongoose.connect('mongodb://localhost/restful_Task_API');
 var TaskSchema = new mongoose.Schema({
   title: {type: String,required: true},
   description: {type: String,default: ""},
-  completed: {type: Boolean,default: false},}, {timestamps: true});
+  completed: {type: Boolean,default: false}
+}, {timestamps: true});
 
 
 //  ### setting schema in Model
 
 // setting schema and getting schema by storing it in var Task
 var Task = mongoose.model('Tasks', TaskSchema);
-
-
-
 
 // static content chelley
 app.use(express.static(path.join(__dirname,"mish-project/dist/mish-project")));
