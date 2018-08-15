@@ -1,16 +1,18 @@
-import { TodosService } from './todos.service';
+
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
+// import { NinjagoldService } from './ninjagold.service';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [BrowserModule, HttpClientModule],
-  providers: [TodosService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

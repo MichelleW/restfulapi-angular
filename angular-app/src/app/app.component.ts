@@ -1,5 +1,5 @@
+import { NinjagoldService } from './ninjagold.service';
 import { Component } from '@angular/core';
-import { TodosService } from './todos.service';
 
 //decorator
 @Component({
@@ -7,50 +7,27 @@ import { TodosService } from './todos.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-    //define datat types
-    tasks: any;
-    task: any;
-    show:boolean;
-
-
-    //what happens when i add another private variable? which private var does this.task belongs to??
-
-    constructor(private _todosService: TodosService) {
+export class AppComponent { 
+    totalGold: number;
+    activityLog:string[];
+ 
+    constructor(private _ninjagold:NinjagoldService) {
         //assign value to the defined variables
-        this.task = []
-        this.task = null;
-        this.show = false;
-        ng-on-init
+        this.totalGold = 0;
+        this.activityLog = [];
     }
-    //need to reassign value to opposite of the current value
-    // toggle(){
-    //     this.show = !this.show;
-    // }
-    getTasks() {
-        console.log('getTasks is working');
-        const tempObservable = this._todosService.getTasks();
-        tempObservable.subscribe(
-            (tasksReturned) => {
-                console.log('response: ', tasksReturned);
-                this.tasks = tasksReturned;
-            }, (err) => {
-                console.log('error: ', err);
-            });
+    farm(){
+        console.log('farm was clicked');
+        const gold = Math.floor((Math.random()*4)+2)
+        console.log('gold',gold);
+        const msg = `went to the farm and gained ${gold} gold.`;
+        
+        // const msg = "went to the farm" + gold + "gold. hehe";
+        this.totalGold +=gold;
+        //.unshift will push element to index 0
+        this.activityLog.unshift(msg)
     }
-
-    getTask(id) {
-        console.log('getTask is working');
-        const tempObservable = this._todosService.getOneTask(id);
-
-        tempObservable.subscribe(
-            (taskReturned) => {
-                console.log('response: ', taskReturned);
-                this.task = taskReturned;
-            }, (err) => {
-                console.log('err: ', err);
-            });
-    }
+   
 
 
 }
