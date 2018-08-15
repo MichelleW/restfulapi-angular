@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TodosService } from './todos.service';
 
+//decorator
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -20,6 +21,7 @@ export class AppComponent {
         this.task = []
         this.task = null;
         this.show = false;
+        ng-on-init
     }
     //need to reassign value to opposite of the current value
     // toggle(){
@@ -33,7 +35,7 @@ export class AppComponent {
                 console.log('response: ', tasksReturned);
                 this.tasks = tasksReturned;
             }, (err) => {
-                console.log('isplerr: ', err);
+                console.log('error: ', err);
             });
     }
 
