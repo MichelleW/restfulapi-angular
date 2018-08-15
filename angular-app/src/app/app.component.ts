@@ -17,8 +17,6 @@ export class AppComponent {
 
     constructor(private _todosService: TodosService) {
         //assign value to the defined variables
-        console.log('_todosService:' _todosService);
-        
         this.task = []
         this.task = null;
         this.show = false;
