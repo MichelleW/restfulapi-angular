@@ -12,21 +12,24 @@
 
   <div class="container mt-5">
     <h1 class="text-center text-primary">Restful Tasks API</h1>
-
+    <h2>The task: </h2>
+    
+    <ul *ngIf="task">
+      <li>Task # {{task.id}} {{task.title}}</li>
+    </ul>
       <!-- {{ tasks | json }} -->
 
     <button (click)="getTasks()" class="btn btn-danger">Get Tasks</button>
-    <button (click)="getTask(8)" class="btn btn-warning">Get Third Task</button>
+    <button (click)="getTask(3)" class="btn btn-warning">Get Third Task</button>
     <h2 class="text-center">All the Tasks:</h2>
            
-    <ul class="list-group" *ngFor="let task of tasks"> 
-      <li>{{task.title}}</li>
+    <ul class="list-group" > 
+      <li *ngFor="let task of tasks">Task # {{task.id}} {{task.title}} <button (click)="getTask(this.task.id)" class="btn btn-info">Show</button> </li>
+
+      
     </ul>
-    <h2>The third task: </h2>
-    
-    <ul *ngIf="task">
-      <li>{{task.title}}</li>
-    </ul>
+
+ 
   </div>
   
 </body>

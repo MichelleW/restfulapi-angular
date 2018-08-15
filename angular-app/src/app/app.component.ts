@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataService } from './data.service';
+import { TodosService } from './todos.service';
 
 @Component({
     selector: 'app-root',
@@ -7,21 +7,29 @@ import { DataService } from './data.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    //define datat types
     tasks: any;
     task: any;
     show:boolean;
 
-    constructor(private _dataService: DataService) {
+
+    //what happens when i add another private variable? which private var does this.task belongs to??
+
+    constructor(private _todosService: TodosService) {
+        //assign value to the defined variables
+        console.log('_todosService:' _todosService);
+        
         this.task = []
         this.task = null;
         this.show = false;
     }
-    toggle(){
-        this.show = !this.show;
-    }
+    //need to reassign value to opposite of the current value
+    // toggle(){
+    //     this.show = !this.show;
+    // }
     getTasks() {
         console.log('getTasks is working');
-        const tempObservable = this._dataService.getTasks();
+        const tempObservable = this._todosService.getTasks();
         tempObservable.subscribe(
             (tasksReturned) => {
                 console.log('response: ', tasksReturned);
@@ -33,7 +41,7 @@ export class AppComponent {
 
     getTask(id) {
         console.log('getTask is working');
-        const tempObservable = this._dataService.getOneTask(id);
+        const tempObservable = this._todosService.getOneTask(id);
 
         tempObservable.subscribe(
             (taskReturned) => {
