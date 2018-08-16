@@ -15,6 +15,8 @@ export class NinjagoldService {
     return this._http.post('/ninjas',{gold:gold,msg:msg});
   };
  
-
+  addTask(){
+    return this._http.post('/task',newTask);
+  }
 }
 

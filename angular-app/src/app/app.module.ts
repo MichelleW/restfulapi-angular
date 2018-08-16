@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 // import { NinjagoldService } from './ninjagold.service';
-
+import {FormsModule} from '@angular/forms'
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule,FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

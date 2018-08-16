@@ -11,24 +11,17 @@
 <body>
 
   <div class="container mt-5">
-    <h1 class="text-center text-primary">Restful Tasks API</h1>
-    <h2>total gold: </h2> 
- 
-  <p>
-    {{ totalGold | json }}</p>
+    <h1 class="text-center text-primary">Forms</h1>
+   
 
-  <p *ngFor="let log of activityLog">
-    {{ log }}
-  </p>
-
-<hr>
-  <p>
-    here: {{ activityLog[0] }}
-  </p>
-
-    <button (click)="farm()" class="btn btn-danger">Farm</button>
- 
-
+    <form (submit)="onSubmit()">
+            <!-- use the json pipe to see how newTask changes in real time -->
+            <p> {{ newTask | json }} </p>
+            <input type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+            <input type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+            <input type="submit" value="Create Task" />
+        </form>
+        
  
   </div>
   
