@@ -13,7 +13,10 @@
   <div class="container mt-5">
     <h1 class="text-center text-primary">Forms</h1>
    
+    <p> one task: {{ newTask | json }} </p>
 
+    here<p *ngFor="let task of newTask"> {{ task.title | json }} </p>
+    
     <form (submit)="onSubmit()">
             <!-- use the json pipe to see how newTask changes in real time -->
             <p> {{ newTask | json }} </p>

@@ -14,9 +14,12 @@ export class NinjagoldService {
   adventureLog(gold,msg){
     return this._http.post('/ninjas',{gold:gold,msg:msg});
   };
- 
-  addTask(){
-    return this._http.post('/task',newTask);
+  getTasks(newTasks) {
+    return this._http.get('/tasks',newTasks);
+  }
+
+  addTask(newTask){
+    return this._http.post('/tasks',newTask);
   }
 }
 
