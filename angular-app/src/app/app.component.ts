@@ -13,22 +13,17 @@ export class AppComponent implements OnInit{
     newTask:any;
 
     constructor(private _ningiagoldService: NinjagoldService){
-    this.newTasks = {};
-    this.newTask = {};
+    
     }
-
+    // runs function as soon as component is called; works just like constructor in Class
     ngOnInit(){
+        this.newTasks = [];
         this.newTask = {title: "", description: ""}
-        this.getTasks()
+        this.getTasks();
     }
 
-    onSubmit(){
-
-        this.newTask ={title:"", description:""}
-        this.addTask();
-    }
     addTask() {
-        console.log('addTask is working');
+        console.log('addTask is working',this.newTask);
         const tempObservable = this._ningiagoldService.addTask(this.newTask);
         tempObservable.subscribe(
             (tasksReturned) => {
@@ -37,15 +32,18 @@ export class AppComponent implements OnInit{
             }, (err) => {
                 console.log('error: ', err);
             });
+        //reset form field value to empty 
+        this.newTask ={title:"", description:""}
+
     }
 
     getTasks() {
         console.log('getTasks is working');
-        const tempObservable = this._ningiagoldService.getTasks(this.newTasks);
+        const tempObservable = this._ningiagoldService.getTasks();
         tempObservable.subscribe(
             (tasksReturned) => {
                 console.log('response: ', tasksReturned);
-                this.newTask = tasksReturned;
+                this.newTasks = tasksReturned;
             }, (err) => {
                 console.log('error: ', err);
             });
