@@ -17,24 +17,35 @@ export class NinjagoldService {
     return this._http.get('/tasks');
   }
 
-  getTask(id) {
-    return this._http.get('/tasks/'+id);
-  }
-
   addTask(newTask){
     console.log('newtask :', newTask);
     return this._http.post('/tasks',newTask);
   }
 
-  //post data to /tasks/:id route with taskid
-  updateTask(taskid) {
-   console.log('updatetask :', taskid);
-    return this._http.get('/tasks/:id',taskid);
-  }
+  
+  getWidget(id) {
+    console.log("@@@@ 2",id);
+    return this._http.get('/tasks/' + id);
+}
 
   deleteTask(taskObj){
     console.log('delete id:', taskObj._id);
     return this._http.delete('/tasks/'+taskObj._id);
   }
+
+   //post data to /tasks/:id route with taskid
+  
+
+  getTask(id) {
+    console.log("@@@@ 2");
+    return this._http.get('/tasks/' + id);
+}
+
+  updateTask(widgetDetails) {
+    return this._http.put('/tasks/' + widgetDetails._id, widgetDetails);
+}
+
+ 
+ 
 }
 

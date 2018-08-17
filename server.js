@@ -117,23 +117,30 @@ app.get('/tasks/:id', function(req, res){
     })
 })
 
-app.put('/tasks/:id', function(req, res){
-    console.log("app.post('/tasks/:id/update', function(req, res){ req.params.id })", req.params.id);
-    console.log("app.post('/tasks/:id/update', function(req, res){ req.body })", req.body);
-    Task.findOne({_id: req.params.id}, function(err, task){
-        console.log("Task.findOne({_id: req.params.id}, function(err, task){ err })", err);
-        console.log("Task.findOne({_id: req.params.id}, function(err, task){ task })", task);
-        task.title = req.body.title;
-        task.description = req.body.description;
-        task.save(function(err){
-            console.log("task.save(function(err){ err })", err);
-            console.log("task.save(function(err){ task })", task);
-            if(err){
-                res.json(err);
-            } else {
-                res.json(task);
-            }
-        })
+
+app.put('/tasks/:id', function(req, res) {
+    console.log("SERVER > put widgets/id");
+    console.log("SERVER > put widgets/id params.id", req.params.id);
+    console.log("SERVER > put widgets/id body", req.body);
+    Task.findById(req.params.id, function(err, task){
+        console.log("SERVER > findbyid, err ", err)
+        console.log("SERVER > findbyid, widget ", task)
+        if(err){
+
+        } else {
+            console.log("widget found for update:", task);
+            task.title = req.body.title;
+            task.description = req.body.description;
+            task.qty = req.body.qty;
+            task.price = req.body.price;
+            task.save(function(err){
+                if(err){
+                    res.json(err);
+                } else {
+                    res.json(true);
+                }
+            })
+        }
     })
 })
 

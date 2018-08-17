@@ -10,8 +10,8 @@ import { Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit{ 
     tasks:any;
-    newTask:any;
-    editTask:any;
+    task:any;
+    taskDetails:any;
 
     constructor(private _ningiagoldService: NinjagoldService){
     
@@ -19,23 +19,22 @@ export class AppComponent implements OnInit{
     // runs function as soon as component is called; works just like constructor in Class
     ngOnInit(){
         this.tasks = [];
-        this.newTask = {title: "", description: ""}
+        this.task = {title: "", description: ""};
+        this.taskDetails ={title: "", description: ""};
         this.getTasks();
     }
 
     addTask() {
-        console.log('addTask is working',this.newTask);
-        const tempObservable = this._ningiagoldService.addTask(this.newTask);
+        console.log('addTask is working',this.task);
+        const tempObservable = this._ningiagoldService.addTask(this.task);
         tempObservable.subscribe(
             (tasksReturned) => {
                 console.log('response: ', tasksReturned);
-                this.newTask = tasksReturned;
+               
                 this.getTasks();
             }, (err) => {
                 console.log('error: ', err);
             });
-        //reset form field value to empty 
-        this.newTask ={title:"", description:""}
 
     }
 
@@ -50,20 +49,34 @@ export class AppComponent implements OnInit{
                 console.log('error: ', err);
             });
 
-            this.newTask ={title:"", description:""}
+    }
+ 
+
+    getWidget(id) {
+        console.log("@@@@ 1",id);
+        const tempObservable = this._ningiagoldService.getWidget(id);
+        tempObservable.subscribe(
+            (success) => {
+                console.log("@@@@ 5 response:", success);
+                this.taskDetails = success;
+            },
+            (error) => {
+
+            }
+        );
+    }
+    updateTask() {
+        const tempObservable = this._ningiagoldService.updateTask(this.taskDetails);
+        tempObservable.subscribe(
+            (success) => {
+                this.getTasks();
+            },
+            (error) => {
+
+            }
+        );
     }
 
-    updateTask(id) {
-      console.log('test id', id);
-      const tempObservable = this._ningiagoldService.updateTask(id);
-      tempObservable.subscribe(
-        (tasksReturned) => {
-          console.log('response: ', tasksReturned);
-          this.tasks = tasksReturned;
-        }, (err) => {
-          console.log('error: ', err);
-        });
-    }
 
     deleteTask(id){
         console.log('delete task :', id);
