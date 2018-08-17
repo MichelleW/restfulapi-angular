@@ -56,11 +56,11 @@ mongoose.connect("mongodb://localhost/tasks")
 
 const TaskSchema = new mongoose.Schema({
     title: { 
-        type: String
+        type: String, 
+        required: [true, 'Title must exist.'], 
+        minlength: [3, 'Length must be at least 3 characaters long.'] 
     },
-    description: { 
-        type: String
-    },
+    description: String,
     completed: { 
         type: Boolean, 
         default: false
@@ -83,6 +83,7 @@ app.use(express.static(path.join(__dirname, "angular-app/dist/angular-app")));
 app.get('/tasks', function (req, res) {
     console.log("app.get('/tasks', function (req, res) { ... })");
     Task.find({}, function(err, tasks){
+        
         res.json(tasks);
         // res.json({tasks:tasks, message:'tasks returned'});
     })
@@ -105,17 +106,18 @@ app.post('/tasks', function (req, res) {
 })
 
 app.get('/tasks/:id', function(req, res){
-    console.log("app.get('/tasks/:id', function(req, res){ ... })")
-    Task.findOne({ _id:req.params.id }, function(err, task){
-        console.log("Task.findOne({ _id:req.params.id }, function(err, task){ err })", err);
-        console.log("Task.findOne({ _id:req.params.id }, function(err, task){ task })", task);
+    console.log("from get route: req.params.id",req.params.id)
+
+    Task.findById(req.params.id, function(err, task){
+        
         if(err){
             res.json(err);
         } else {
+            
             res.json(task);
         }
     })
-})
+}) 
 
 
 app.put('/tasks/:id', function(req, res) {
@@ -138,6 +140,7 @@ app.put('/tasks/:id', function(req, res) {
                     res.json(err);
                 } else {
                     res.json(true);
+                 
                 }
             })
         }

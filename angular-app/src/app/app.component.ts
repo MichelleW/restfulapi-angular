@@ -59,24 +59,27 @@ export class AppComponent implements OnInit{
             (success) => {
                 console.log("@@@@ 5 response:", success);
                 this.taskDetails = success;
+
+                    console.log('taskDetail :', this.taskDetails);
+
             },
             (error) => {
-
+                console.log('error: ', error);
             }
         );
     }
     updateTask() {
         const tempObservable = this._ningiagoldService.updateTask(this.taskDetails);
         tempObservable.subscribe(
-            (success) => {
+            (tasksReturned) => {
+                console.log('response: ', tasksReturned);
+                this.taskDetails = tasksReturned;
                 this.getTasks();
-            },
-            (error) => {
-
-            }
-        );
-    }
-
+            }, (err) => {
+                console.log('error: ', err);
+            });
+        }
+    
 
     deleteTask(id){
         console.log('delete task :', id);

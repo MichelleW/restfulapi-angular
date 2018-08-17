@@ -22,11 +22,10 @@ export class NinjagoldService {
     return this._http.post('/tasks',newTask);
   }
 
-  
   getWidget(id) {
     console.log("@@@@ 2",id);
     return this._http.get('/tasks/' + id);
-}
+  }
 
   deleteTask(taskObj){
     console.log('delete id:', taskObj._id);
@@ -34,18 +33,17 @@ export class NinjagoldService {
   }
 
    //post data to /tasks/:id route with taskid
-  
-
+ 
   getTask(id) {
     console.log("@@@@ 2");
     return this._http.get('/tasks/' + id);
-}
+  }
 
-  updateTask(widgetDetails) {
-    return this._http.put('/tasks/' + widgetDetails._id, widgetDetails);
-}
+  updateTask(taskDetails) {
+    console.log('taskDetails :', taskDetails);
+    return this._http.put('/tasks/' + taskDetails._id, taskDetails);
+  }
 
- 
  
 }
 
