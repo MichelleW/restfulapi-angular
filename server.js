@@ -56,7 +56,7 @@ mongoose.connect("mongodb://localhost/tasks")
 
 const TaskSchema = new mongoose.Schema({
     title: { 
-        type: String, 
+        type: String
     },
     description: { 
         type: String
@@ -94,8 +94,8 @@ app.post('/tasks', function (req, res) {
     taskInstance.title = req.body.title;
     taskInstance.description= req.body.description;
     taskInstance.save(function(err, data){
-        console.log("taskInstance.save(function(err, data){ err })", err);
-        console.log("taskInstance.save(function(err, data){ data })", data);
+        console.log("taskInstance.save()", err);
+        console.log("taskInstance.save()", data);
         if (err) {            
             res.json(err);
         } else {
@@ -139,9 +139,16 @@ app.put('/tasks/:id', function(req, res){
 
 app.delete("/tasks/:id", function(req, res){
     console.log("app.get('/tasks/:id/delete', function(req, res){ req.params.id });", req.params.id);
-    Task.findOneAndDelete({_id: req.params.id}, function(result) {
-        console.log("Note.findOneAndDelete({_id: req.params.id}, function(result) { result })", result)
-        res.json(result);
+   
+    Task.findOneAndDelete({_id: req.params.id}, function(err, result) {
+       if(err){
+           console.log('delete err :',  err);
+       }else{
+        console.log('result  :',  result);
+        Task.find({}, function(err, tasks){
+            res.json(tasks);
+        })
+       }
     })
 })
 // ==================================

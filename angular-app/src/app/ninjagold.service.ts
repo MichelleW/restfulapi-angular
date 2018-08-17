@@ -7,8 +7,6 @@ import { Injectable } from '@angular/core';
 export class NinjagoldService {
 
   constructor(private _http:HttpClient) { 
-
-    
   }
 
   adventureLog(gold,msg){
@@ -19,16 +17,24 @@ export class NinjagoldService {
     return this._http.get('/tasks');
   }
 
+  getTask(id) {
+    return this._http.get('/tasks/'+id);
+  }
+
   addTask(newTask){
-    console.log('new task', newTask);
-    
+    console.log('newtask :', newTask);
     return this._http.post('/tasks',newTask);
   }
 
-  //5b75b4e081e74e6d1cdeb027
+  //post data to /tasks/:id route with taskid
+  updateTask(taskid) {
+   console.log('updatetask :', taskid);
+    return this._http.get('/tasks/:id',taskid);
+  }
 
-  getOneTask(id) {
-    return this._http.get('/tasks/:id');
+  deleteTask(taskObj){
+    console.log('delete id:', taskObj._id);
+    return this._http.delete('/tasks/'+taskObj._id);
   }
 }
 

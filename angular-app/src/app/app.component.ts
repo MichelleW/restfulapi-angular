@@ -9,15 +9,16 @@ import { Component, OnInit} from '@angular/core';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{ 
-    newTasks:any;
+    tasks:any;
     newTask:any;
+    editTask:any;
 
     constructor(private _ningiagoldService: NinjagoldService){
     
     }
     // runs function as soon as component is called; works just like constructor in Class
     ngOnInit(){
-        this.newTasks = [];
+        this.tasks = [];
         this.newTask = {title: "", description: ""}
         this.getTasks();
     }
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit{
             (tasksReturned) => {
                 console.log('response: ', tasksReturned);
                 this.newTask = tasksReturned;
+                this.getTasks();
             }, (err) => {
                 console.log('error: ', err);
             });
@@ -43,11 +45,36 @@ export class AppComponent implements OnInit{
         tempObservable.subscribe(
             (tasksReturned) => {
                 console.log('response: ', tasksReturned);
-                this.newTasks = tasksReturned;
+                this.tasks = tasksReturned;
             }, (err) => {
                 console.log('error: ', err);
             });
+
+            this.newTask ={title:"", description:""}
     }
 
+    updateTask(id) {
+      console.log('test id', id);
+      const tempObservable = this._ningiagoldService.updateTask(id);
+      tempObservable.subscribe(
+        (tasksReturned) => {
+          console.log('response: ', tasksReturned);
+          this.tasks = tasksReturned;
+        }, (err) => {
+          console.log('error: ', err);
+        });
+    }
+
+    deleteTask(id){
+        console.log('delete task :', id);
+        const tempObservable = this._ningiagoldService.deleteTask(id);
+        tempObservable.subscribe(
+            (tasksReturned) => {
+            console.log('hi response: ', tasksReturned);
+            this.tasks = tasksReturned;
+            }, (err) => {
+            console.log('error: ', err);
+            });
+    }
 
 }
